@@ -1,6 +1,6 @@
 Hi everyone, I’m Stephen Ignatius Abel, You can also call me Sagit Achylychyli or Sagit 8:10:12:15. I'm the creator of FlamePL and the author of its interpreter.
 
-From August 24, 2026, until now, in less than a month, FlamePL has already gone through updates from version 1.0 to 1.3. Today, FlamePL is a complete system, with its own standard library, a syntax based on Python but unique in its own way, and an official documentation — [https://esolangs.org/wiki/FlamePL](right here).
+From August 24, 2026, until now, in less than a month, FlamePL has already gone through updates from version 1.0 to 1.3. Today, FlamePL is a complete system, with its own standard library, a syntax based on Python but unique in its own way, and an official documentation — [right here](https://esolangs.org/wiki/FlamePL).
 
 Here’s the changelog for this programming language:
 
