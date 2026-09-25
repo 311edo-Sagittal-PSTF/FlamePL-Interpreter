@@ -103,7 +103,7 @@ class Evaluator:
 
     # ---------- main dispatch ----------
     def evaluate(self, node, env):
-        if isinstance(node, ast.Number):         return node.value
+        if isinstance(node, ast.Number):         return Decimal(node.value)
         if isinstance(node, ast.ImagLiteral):    return FlamePLComplex(0, node.value)
         if isinstance(node, ast.String):         return node.value
         if isinstance(node, ast.BooleanLiteral): return node.value
