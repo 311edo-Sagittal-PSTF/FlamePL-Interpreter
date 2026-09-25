@@ -17,11 +17,45 @@ from .stdlib import get_builtin_module, has_builtin_module
 
 
 class Evaluator:
-    def __init__(self, global_env):
+    def __init__(self, global_env, auto_print=False):
         self.global_env = global_env
         self.loaded_modules = {}
         self.loading = set()
         self.current_file_dir = "."
+        self.auto_print = auto_print
+
+    # ---------- NEW: string evaluation ----------
+    def eval_string(self, source, env, as_expression=True):
+        """Parse and evaluate a source string in the given environment."""
+        tokens = Lexer(source).tokenize()
+        parser = Parser(tokens)
+        if as_expression:
+            expr = parser.parse_expression()
+            if not parser.match('EOF'):
+                raise SyntaxError("eval(): trailing tokens after expression")
+            return self.evaluate(expr, env)
+        stmts = parser.parse()
+        return self.evaluate_block(stmts, env)
+
+    # ---------- NEW: top-level program runner with auto-echo ----------
+    _NO_ECHO = (
+        ast.Assign, ast.If, ast.While, ast.ForLoop,
+        ast.FunctionDef, ast.ClassDef, ast.Return,
+        ast.Import, ast.FromImport,
+    )
+
+    def evaluate_program(self, statements, env):
+        """Evaluate a top-level program. Echo expression results if auto_print."""
+        result = None
+        for stmt in statements:
+            # Print() handles its own output; skip it to avoid double-echo.
+            is_print = isinstance(stmt, ast.Print)
+            is_statement = isinstance(stmt, self._NO_ECHO)
+            value = self.evaluate(stmt, env)
+            if self.auto_print and not is_print and not is_statement:
+                print(_repr_value(value))
+            result = value
+        return result
 
     # ---------- module loading ----------
     def resolve_module_path(self, name, base_dir):
@@ -264,3 +298,11 @@ class Evaluator:
         if isinstance(val, (FlamePLClass, FlamePLInstance)):       return CLASS_TYPE
         if isinstance(val, FlamePLModule):      return MODULE_TYPE
         return FlamePLType(type(val).__name__)
+
+def _repr_value(v):
+    """User-facing representation for REPL auto-echo."""
+    if v is None:
+        return "null"
+    if isinstance(v, str):
+        return repr(v)       # quotes so strings stand out
+    return str(v)
