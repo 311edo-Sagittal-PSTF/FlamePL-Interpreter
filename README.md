@@ -4,13 +4,14 @@ From August 24, 2026 to now, FlamePL has already gone through updates from versi
 
 Here’s the changelog for this programming language:
 
-1.0: I created this language and wrote a bug-ridden interpreter.
-1.0f: I patched up the interpreter.
-1.1α: I added the modulo operation.
-1.1β: I added the for loop.
-1.2: I added the language’s first standard library — Math.
-1.3: I added more standard libraries.
-1.4: I added self-evaluating and self-executing functions and added an REPL like Python.
+* 1.0: I created this language and wrote a bug-ridden interpreter.
+* 1.0f: I patched up the interpreter.
+* 1.1α: I added the modulo operation.
+* 1.1β: I added the for loop.
+* 1.2: I added the language’s first standard library — Math.
+* 1.3: I added more standard libraries.
+* 1.4: I added self-evaluating and self-executing functions and added an REPL like Python.
+* 1.4 Build 202609: islptng helped to fix some bugs.
 
 This language has also been criticized for being too similar to R, but that’s not the point — every programming language has its meaning. For example, FlamePL actually serves higher-precision or even pure decimal computations. If this language really seems too similar to R, maybe it’s just a coincidence, but during its creation, I did draw inspiration from R, or even earlier, APL — you can see that from the left arrow.
 
